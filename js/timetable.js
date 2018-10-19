@@ -4,10 +4,6 @@ $(function () {
     const classUrl = 'https://sandbox.gibm.ch/klassen.php';
     const scheduleUrl = 'http://sandbox.gibm.ch/tafel.php';
 
-    if (Cookies.get('class')) {
-        initializeCalendar();
-    }
-
     function initializeCalendar() {
         $('#calendar').fullCalendar({
             defaultView: 'agendaWeek',
@@ -100,7 +96,8 @@ $(function () {
         Cookies.set('job', $("#slctJob option:selected").val(), { expires: 7 });
         Cookies.set('class', $("#slctClass option:selected").val(), { expires: 7 });
         $('#settings').modal('hide');
-        initializeCalendar();
+        //initializeCalendar();
+        $('#calendar').fullCalendar('refetchEvents');
     }
 
     //Event Handler
@@ -111,4 +108,10 @@ $(function () {
     });
 
     //Check for cookies on load
+    if (Cookies.get('class')) {
+        initializeCalendar();
+    } else {
+        $('#settings').modal('show');
+        populateJobDrop();
+    }
 });
