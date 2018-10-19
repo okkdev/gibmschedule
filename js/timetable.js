@@ -20,7 +20,12 @@ $(function () {
             header: {
                 left: '',
                 center: 'title',
-                right: 'today prev,next'
+                right: ''
+            },
+            footer: {
+                left: '',
+                center: 'today prev,next',
+                right: ''
             },
             themeSystem: 'bootstrap4',
             nowIndicator: true,
@@ -29,7 +34,7 @@ $(function () {
             events: function (start, end, timezone, callback) {
                 var week = start.stripTime().format('W-Y');
                 var events = [];
-                $.getJSON(scheduleUrl, { klasse_id: Cookies.get('class'), woche: week }, function (data) {
+                $.getJSON(scheduleUrl, { klasse_id: localStorage.getItem('class'), woche: week }, function (data) {
                     for (var d of data) {
                         var event = {
                             title: d.tafel_longfach,
@@ -90,10 +95,10 @@ $(function () {
                 $('#slctJob').append(option);
             }
         }).done(function () {
-            if (Cookies.get('job')) {
+            if (localStorage.getItem('job')) {
                 $("#slctJob option:selected").removeAttr('selected');
-                $("#slctJob option[value=" + Cookies.get('job') + "]").prop('selected', true);
-                populateClassDrop(Cookies.get('job'));
+                $("#slctJob option[value=" + localStorage.getItem('job') + "]").prop('selected', true);
+                populateClassDrop(localStorage.getItem('job'));
             }
         });
     }
@@ -107,17 +112,17 @@ $(function () {
                 $('#slctClass').append(option);
             }
         }).done(function () {
-            if (Cookies.get('job')) {
+            if (localStorage.getItem('job')) {
                 $("#slctClass option:selected").removeAttr('selected');
-                $("#slctClass option[value=" + Cookies.get('class') + "]").prop('selected', true);
+                $("#slctClass option[value=" + localStorage.getItem('class') + "]").prop('selected', true);
             }
         });
     }
 
-    //sets the cookies for the current choice and updates the calendar
+    //sets the localstorage for the current choice and updates the calendar
     function saveSettings() {
-        Cookies.set('job', $("#slctJob option:selected").val(), { expires: 8 });
-        Cookies.set('class', $("#slctClass option:selected").val(), { expires: 8 });
+        localStorage.setItem('job', $("#slctJob option:selected").val());
+        localStorage.setItem('class', $("#slctClass option:selected").val());
         $('#settings').modal('hide');
         $('#calendar').fullCalendar('refetchEvents');
     }
@@ -158,7 +163,7 @@ $(function () {
     //Onload stuff
     initializeCalendar();
     switchDayWeek();
-    if (!Cookies.get('class')) {
+    if (!localStorage.getItem('class')) {
         $('#settings').modal('show');
         populateJobDrop();
     }
