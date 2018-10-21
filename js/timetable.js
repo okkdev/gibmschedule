@@ -7,7 +7,7 @@ $(function () {
     //creates the calendar with all the parameters and data from the api
     function initializeCalendar() {
         $('#calendar').fullCalendar({
-            defaultView: 'agendaDay',
+            defaultView: 'agendaWeek',
             handleWindowResize: true,
             height: 'auto',
             weekends: false,
@@ -17,16 +17,8 @@ $(function () {
             slotLabelFormat: 'HH:mm',
             titleFormat: 'D MMMM YYYY',
             timeFormat: 'HH:mm',
-            header: {
-                left: '',
-                center: 'title',
-                right: ''
-            },
-            footer: {
-                left: '',
-                center: 'today prev,next',
-                right: ''
-            },
+            header: false,
+            footer: false,
             themeSystem: 'bootstrap4',
             nowIndicator: true,
             minTime: '06:00:00',
@@ -136,6 +128,20 @@ $(function () {
         }
     }
 
+    function next() {
+        $('.fc-event').animate({ opacity: 0 }, 200, 'linear', function () {
+            $('#calendar').fullCalendar('next');
+            $('.fc-event').animate({ opacity: 100 }, 200, 'linear');
+        });
+    }
+
+    function prev() {
+        $('.fc-event').animate({ opacity: 0 }, 200, 'linear', function () {
+            $('#calendar').fullCalendar('prev');
+            $('.fc-event').animate({ opacity: 100 }, 200, 'linear');
+        });
+    }
+
     //Event Handler
     $('#btnSettings').click(populateJobDrop);
     $('#btnSave').click(saveSettings);
@@ -146,15 +152,9 @@ $(function () {
     $('#calendar').swipe({
         swipe: function (event, direction, distance, duration, fingerCount) {
             if (direction == 'left') {
-                $('.fc-view-container').animate({ opacity: 0 }, 200, 'linear', function () {
-                    $('#calendar').fullCalendar('next');
-                    $('.fc-view-container').animate({ opacity: 100 }, 200, 'linear');
-                });
+                next();
             } else if (direction == 'right') {
-                $('.fc-view-container').animate({ opacity: 0 }, 200, 'linear', function () {
-                    $('#calendar').fullCalendar('prev');
-                    $('.fc-view-container').animate({ opacity: 100 }, 200, 'linear');
-                });
+                prev();
             }
 
         }
