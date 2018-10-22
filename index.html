@@ -6,84 +6,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="css\main.css">
 
-    <title>GIBM Timetable</title>
+    <title>GIBM Schedule</title>
 </head>
 
 <body>
-    <div class="container">
-
-        <!-- Settings Button -->
-        <div class="col">
-            <button id="btnSettings" type="button" class="btn btn-primary" data-toggle="modal" data-target="#settings">
-                <i class="fas fa-cog"></i>
-            </button>
-        </div>
-
-        <div class="col">
-            <h3 id="titleHeader">Test</h3>
-        </div>
-
-        <!-- Settings Modal -->
-        <div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="Settings" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Settings</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <label for="slctJob">Job:</label>
-                        <select id="slctJob" class="custom-select">
-                            <option selected>Select job</option>
-                        </select>
-                        <label for="slctClass">Class:</label>
-                        <select id="slctClass" class="custom-select">
-                            <option selected>Select class</option>
-                        </select>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" id="btnSave" class="btn btn-primary">Save</button>
-                    </div>
+    <!-- Settings Modal -->
+    <div class="modal fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="Settings" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Settings</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <label for="slctJob">Job:</label>
+                    <select id="slctJob" class="custom-select">
+                        <option selected>Select job</option>
+                    </select>
+                    <label for="slctClass">Class:</label>
+                    <select id="slctClass" class="custom-select">
+                        <option selected>Select class</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btnSave" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Mobile Info Modal -->
-        <div class="modal fade" id="eventDetails" tabindex="-1" role="dialog" aria-labelledby="Details" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
+    <!-- Mobile Info Modal -->
+    <div class="modal fade" id="eventDetails" tabindex="-1" role="dialog" aria-labelledby="Details" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title"></h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
                 <div class="modal-body">
                 </div>
-              </div>
             </div>
-          </div>
-
-        <!-- Timetable -->
-        <div id='calendar' class="col"></div>
+        </div>
     </div>
 
+
+    <div class="container">
+        <!-- Top Row -->
+        <div class="row">
+            <div class="col">
+                <h4 class="align-middle">GIBM Schedule</h4>
+            </div>
+            <!-- Settings Button -->
+            <div class="col">
+                <button id="btnSettings" type="button" class="btn btn-light float-right shadow-sm" data-toggle="modal" data-target="#settings">
+                    <i class="fas fa-cog"></i>
+                </button>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <!-- Timetable -->
+            <div id='calendar' class="col"></div>
+        </div>
+        
+        <!-- Timetable Navigation -->
+        <div id="calendarNavigation" class="d-flex justify-content-center">
+            <nav aria-label="Navigation" id="paginationNav">
+                <ul class="pagination shadow-sm">
+                    <li class="page-item">
+                        <a class="page-link" id="prevNav" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    <li class="page-item" data-toggle="tooltip" data-placement="top" title="Click for Today">
+                        <a class="page-link" id="dateNav">-</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" id="nextNav" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="navbar navbar-expand-sm navbar-light fixed-bottom bg-light site-footer">
+        <div class="mx-auto footerContent">
+            <p class="navbar-text">Made with
+                <i class="fas fa-heart"></i> by Jen Stehlik
+            </p>
+            <a href="https://github.com/ok2094/gibmschedule" class="btn btn-sm btn-light" target="_blank">
+                <i class="fab fa-github-alt"></i>
+            </a>
+        </div>
+    </div>
+
+
     <!-- JavaScript -->
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.19/jquery.touchSwipe.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/2.0.5/velocity.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.min.js"></script>
     <script src="js/timetable.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>

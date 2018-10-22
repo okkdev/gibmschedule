@@ -1,11 +1,26 @@
 #btnSettings {
-    
+    margin: 4px;
 }
 
-#titleHeader {
-    
+#calendarNavigation {
+    margin-top: 5px;
 }
 
-.fc-center h2 {
-    font-size: 1.5em;
+.site-footer {
+    font-size: 0.9em;
+    height: 30px;
+}
+
+.footerContent{
+    margin-top: 15px;
+}
+
+.site-footer .fa-heart {
+    font-size: 0.8em;
+    margin-left: 1px;
+    margin-right: 2px;
+}
+
+.site-footer .fa-github-alt {
+	font-size: 1.2em;
 }
