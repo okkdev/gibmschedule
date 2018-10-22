@@ -83,6 +83,7 @@ function switchDayWeek() {
     setNavDate();
 }
 
+//switch between week/day
 function zap(direction) {
     var sx;
     var ex;
@@ -100,6 +101,7 @@ function zap(direction) {
     });
 }
 
+//set Date between zap buttons
 function setNavDate() {
     var currentday = $('#calendar').fullCalendar('getDate').format('DD.MM.YYYY');
     var weekstart = $('#calendar').fullCalendar('getDate').startOf('isoweek').format('DD.MM.YYYY');

@@ -1,3 +1,17 @@
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+#overlay {
+    position:fixed;
+    z-index:999;
+    top:0;
+    left:0;
+    bottom:0;
+    right:0;
+    background:rgb(230, 230, 230);
+}
+  
 #btnSettings {
     margin: 4px;
 }
@@ -22,5 +36,6 @@
 }
 
 .site-footer .fa-github-alt {
-	font-size: 1.2em;
+    color: grey;
+    font-size: 1.2em;
 }

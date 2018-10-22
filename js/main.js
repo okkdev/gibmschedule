@@ -1,12 +1,13 @@
 $(function () {
-
+    // Variables //
     const jobUrl = 'https://sandbox.gibm.ch/berufe.php';
     const classUrl = 'https://sandbox.gibm.ch/klassen.php';
     const scheduleUrl = 'http://sandbox.gibm.ch/tafel.php';
 
+    // Functions //
     //populates the job select dropdown from the api
     function populateJobDrop() {
-        $('#slctJob').html('<option selected>Select job</option>');
+        $('#slctJob').html('<option>Select job</option>');
         $.getJSON(jobUrl, function (data) {
             for (var d of data) {
                 var option = '<option value="' + d.beruf_id + '">' + d.beruf_name + '</option>';
@@ -14,16 +15,18 @@ $(function () {
             }
         }).done(function () {
             if (localStorage.getItem('job')) {
-                $("#slctJob option:selected").removeAttr('selected');
                 $("#slctJob option[value=" + localStorage.getItem('job') + "]").prop('selected', true);
                 populateClassDrop(localStorage.getItem('job'));
             }
+        }).fail(function() {
+            alert("Seems like the API is down or something is blocking the connection...");
         });
     }
 
     //populates the class select dropdown from the api depending on the job id
     function populateClassDrop(jobId) {
-        $('#slctClass').html('<option selected>Select class</option>');
+        $('#slctClass').html('<option>Select class</option>');
+        $("#slctClass").prop('disabled', false);
         $.getJSON(classUrl, { beruf_id: jobId }, function (data) {
             for (var d of data) {
                 var option = '<option value="' + d.klasse_id + '">' + d.klasse_longname + '</option>';
@@ -31,9 +34,11 @@ $(function () {
             }
         }).done(function () {
             if (localStorage.getItem('job')) {
-                $("#slctClass option:selected").removeAttr('selected');
                 $("#slctClass option[value=" + localStorage.getItem('class') + "]").prop('selected', true);
             }
+        }).fail(function() {
+            $("#slctClass").prop('disabled', true);
+            $("#btnSave").prop('disabled', true);
         });
     }
 
@@ -45,11 +50,18 @@ $(function () {
         $('#calendar').fullCalendar('refetchEvents');
     }
 
-    //Event Handler
+    // Event Handlers //
     $('#btnSettings').click(populateJobDrop);
     $('#btnSave').click(saveSettings);
     $('#slctJob').change(function () {
         populateClassDrop($("#slctJob option:selected").val());
+    });
+    $('#slctClass').change(function () {
+        if ($("#slctClass option:selected").val() == "Select class") {
+            $("#btnSave").prop('disabled', true);
+        } else {
+            $("#btnSave").prop('disabled', false);
+        }
     });
     $(window).resize(switchDayWeek);
     $('#calendar').swipe({
@@ -71,11 +83,18 @@ $(function () {
         });
     });
 
-    //Onload stuff
-    $('[data-toggle="tooltip"]').tooltip()
+    // Onload stuff //
+    //hide overlay
+    $('#overlay').fadeOut();
+    //enable tooltips
+    $('[data-toggle="tooltip"]').tooltip();
+    //initialize calendar
     initializeCalendar(scheduleUrl);
+    //add some spice
     $('.fc-view-container').addClass('shadow');
+    //change view depending on platform
     switchDayWeek();
+    //if there's no localstorage show settings modal
     if (!localStorage.getItem('class')) {
         populateJobDrop();
         $('#settings').modal('show');
