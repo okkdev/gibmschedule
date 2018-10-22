@@ -68,10 +68,10 @@ $(function () {
     });
     $(window).resize(switchDayWeek);
     $('#calendar').swipe({
-        swipeLeft: function (event, direction, distance, duration, fingerCount) {
+        swipeLeft: function () {
             zap('next');
         },
-        swipeRight: function (event, direction, distance, duration, fingerCount) {
+        swipeRight: function () {
             zap('prev');
         }
     });

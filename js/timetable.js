@@ -47,7 +47,7 @@ function initializeCalendar(scheduleUrl) {
 
 
             //popovers only for wide enough screens
-            if ($(window).width() > 800) {
+            if ($(window).width() > 768) {
                 element.popover({
                     title: event.title,
                     html: true,
@@ -83,7 +83,7 @@ function switchDayWeek() {
     setNavDate();
 }
 
-//switch between week/day
+//switch between weeks/days
 function zap(direction) {
     var sx;
     var ex;
