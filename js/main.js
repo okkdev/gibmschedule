@@ -73,7 +73,7 @@ $(function () {
 
     //Onload stuff
     $('[data-toggle="tooltip"]').tooltip()
-    initializeCalendar(scheduleUrl, localStorage.getItem('class'));
+    initializeCalendar(scheduleUrl);
     $('.fc-view-container').addClass('shadow');
     switchDayWeek();
     if (!localStorage.getItem('class')) {

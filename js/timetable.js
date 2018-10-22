@@ -1,5 +1,5 @@
 //creates the calendar with all the parameters and data from the api
-function initializeCalendar(scheduleUrl, classId) {
+function initializeCalendar(scheduleUrl) {
     $('#calendar').fullCalendar({
         defaultView: 'agendaDay',
         handleWindowResize: true,
@@ -20,7 +20,7 @@ function initializeCalendar(scheduleUrl, classId) {
         events: function (start, end, timezone, callback) {
             var week = start.stripTime().format('W-Y');
             var events = [];
-            $.getJSON(scheduleUrl, { klasse_id: classId, woche: week }, function (data) {
+            $.getJSON(scheduleUrl, { klasse_id: localStorage.getItem('class'), woche: week }, function (data) {
                 for (var d of data) {
                     var event = {
                         title: d.tafel_longfach,
