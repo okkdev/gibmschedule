@@ -18,7 +18,7 @@ $(function () {
                 $("#slctJob option[value=" + localStorage.getItem('job') + "]").prop('selected', true);
                 populateClassDrop(localStorage.getItem('job'));
             }
-        }).fail(function() {
+        }).fail(function () {
             alert("Seems like the API is down or something is blocking the connection...");
         });
     }
@@ -36,7 +36,7 @@ $(function () {
             if (localStorage.getItem('job')) {
                 $("#slctClass option[value=" + localStorage.getItem('class') + "]").prop('selected', true);
             }
-        }).fail(function() {
+        }).fail(function () {
             $("#slctClass").prop('disabled', true);
             $("#btnSave").prop('disabled', true);
         });
@@ -47,7 +47,10 @@ $(function () {
         localStorage.setItem('job', $("#slctJob option:selected").val());
         localStorage.setItem('class', $("#slctClass option:selected").val());
         $('#settings').modal('hide');
-        $('#calendar').fullCalendar('refetchEvents');
+        $('.fc-body').transition({ opacity: 0 }, 100, 'ease', function () {
+            $('#calendar').fullCalendar('refetchEvents');
+            $(this).transition({ opacity: 100 }, 100, 'ease');
+        });
     }
 
     // Event Handlers //
@@ -65,18 +68,16 @@ $(function () {
     });
     $(window).resize(switchDayWeek);
     $('#calendar').swipe({
-        swipe: function (event, direction, distance, duration, fingerCount) {
-            if (direction == 'left') {
-                zap('next');
-            } else if (direction == 'right') {
-                zap('prev');
-            }
-
+        swipeLeft: function (event, direction, distance, duration, fingerCount) {
+            zap('next');
+        },
+        swipeRight: function (event, direction, distance, duration, fingerCount) {
+            zap('prev');
         }
     });
-    $('#nextNav').click(function () {zap('next')});
-    $('#prevNav').click(function () {zap('prev')});
-    $('#dateNav').click(function() {
+    $('#nextNav').click(function () { zap('next') });
+    $('#prevNav').click(function () { zap('prev') });
+    $('#dateNav').click(function () {
         $('.fc-body').transition({ opacity: 0 }, 100, 'ease', function () {
             $('#calendar').fullCalendar('today');
             $(this).transition({ opacity: 100 }, 100, 'ease');
