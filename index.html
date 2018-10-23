@@ -87,9 +87,20 @@
 
         </div>
 
+        <!-- Alerts -->
+        <div class="alerts">
+            <div id="warnAlert" class="alert alert-warning text-center shadow" style="display: none" role="alert">
+                Seems like the API is down or something is blocking the connection...
+            </div>
+            <div id="infoAlert" class="alert alert-info text-center shadow" style="display: none" role="alert">
+            </div>
+        </div>
+
+        <!-- Calendar -->
         <div class="row">
-            <!-- Timetable -->
-            <div id='calendar' class="col"></div>
+            <div class="col">
+                <div id='calendar' class="col"></div>
+            </div>
         </div>
 
         <!-- Timetable Navigation -->
@@ -117,24 +128,8 @@
     </div>
 
     <!-- Footer -->
-    <footer class="site-footer">
-        <div class="navbar sticky-top navbar-light bg-light">
-            <div class="container">
-                <div class="navbar-text mx-auto">
-                    <p>Made with
-                        <i class="fas fa-heart"></i> by Jen Stehlik
-                    </p>
-                    <a href="https://github.com/ok2094/gibmschedule" class="btn btn-sm btn-light float-right" target="_blank">
-                        <i class="fab fa-github-alt"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!--
-    <footer class="site-footer">
-        <div class="navbar navbar-expand-sm navbar-light fixed-bottom bg-light">
+    <footer>
+        <div class="navbar navbar-expand-sm navbar-light fixed-bottom bg-light site-footer">
             <div class="mx-auto footerContent">
                 <p class="navbar-text">Made with
                     <i class="fas fa-heart"></i> by Jen Stehlik
@@ -145,7 +140,7 @@
             </div>
         </div>
     </footer>
--->
+
     <!-- JavaScript -->
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>

@@ -19,7 +19,7 @@ $(function () {
                 populateClassDrop(localStorage.getItem('job'));
             }
         }).fail(function () {
-            alert("Seems like the API is down or something is blocking the connection...");
+            $('#warnAlert').fadeIn('slow');
         });
     }
 

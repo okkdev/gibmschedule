@@ -4,12 +4,20 @@ body {
 
 #overlay {
     position:fixed;
-    z-index:999;
+    z-index:99999;
     top:0;
     left:0;
     bottom:0;
     right:0;
     background:rgb(230, 230, 230);
+}
+
+.alerts {
+    z-index:999;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%)
 }
   
 #btnSettings {
@@ -26,7 +34,7 @@ body {
 }
 
 .footerContent{
-    margin-top: 15px;
+    margin-top: 17px;
 }
 
 .site-footer .fa-heart {

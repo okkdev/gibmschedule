@@ -22,8 +22,15 @@ function initializeCalendar(scheduleUrl) {
             var events = [];
             $.getJSON(scheduleUrl, { klasse_id: localStorage.getItem('class'), woche: week }, function (data) {
                 for (var d of data) {
+                    var longfach;
+                    //if to handle empty "berufsmatur" events
+                    if (d.tafel_longfach) {
+                        longfach = d.tafel_longfach;
+                    } else {
+                        longfach = "Berufsmatur";
+                    }
                     var event = {
-                        title: d.tafel_longfach,
+                        title: longfach,
                         start: d.tafel_datum + 'T' + d.tafel_von,
                         end: d.tafel_datum + 'T' + d.tafel_bis,
                         prof: d.tafel_lehrer,
@@ -34,6 +41,16 @@ function initializeCalendar(scheduleUrl) {
                     events.push(event);
                 }
             }).done(function () {
+                //alert when there are no events this week
+                if (events.length <= 0) {
+                    if ($(window).width() > 768) {
+                        $('#infoAlert').html('There seems to be no school this week :)');
+                        $('#infoAlert').fadeIn('slow');
+                    }
+                } else {
+                    $('#infoAlert').fadeOut('slow');
+                }
+                
                 callback(events);
             });
             setNavDate();
@@ -44,7 +61,6 @@ function initializeCalendar(scheduleUrl) {
             if (event.comment) {
                 description += '<br/>Comment: ' + event.comment;
             }
-
 
             //popovers only for wide enough screens
             if ($(window).width() > 768) {
@@ -77,8 +93,10 @@ function initializeCalendar(scheduleUrl) {
 function switchDayWeek() {
     if ($(window).width() < 768) {
         $('#calendar').fullCalendar('changeView', 'agendaDay');
+        $('.site-footer').fadeOut('slow');
     } else {
         $('#calendar').fullCalendar('changeView', 'agendaWeek');
+        $('.site-footer').fadeIn('slow');
     }
     setNavDate();
 }
@@ -87,7 +105,7 @@ function switchDayWeek() {
 function zap(direction) {
     var sx;
     var ex;
-    if (direction == 'prev'){
+    if (direction == 'prev') {
         sx = 50;
         ex = -50;
     } else if (direction == 'next') {
