@@ -1,5 +1,5 @@
-# gibmschedule
+# GIBM Schedule
 
-gibm school schedule interface
+Shows events from the GIBM API in Fullcalendar.
 
-school project
+School Project for Module 133
