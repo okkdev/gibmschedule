@@ -2,7 +2,7 @@ $(function () {
     // Variables //
     const jobUrl = 'https://sandbox.gibm.ch/berufe.php';
     const classUrl = 'https://sandbox.gibm.ch/klassen.php';
-    const scheduleUrl = 'http://sandbox.gibm.ch/tafel.php';
+    const scheduleUrl = 'https://sandbox.gibm.ch/tafel.php';
 
     // Functions //
     //populates the job select dropdown from the api
