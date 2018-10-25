@@ -15,7 +15,7 @@ function initializeCalendar(scheduleUrl) {
         footer: false,
         themeSystem: 'bootstrap4',
         nowIndicator: true,
-        minTime: '06:00:00',
+        minTime: '07:00:00',
         maxTime: '18:30:00',
         events: function (start, end, timezone, callback) {
             var week = start.stripTime().format('W-Y');
